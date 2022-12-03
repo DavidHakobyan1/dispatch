@@ -29,7 +29,7 @@ jobs:
         run: go build -v ./...
     
       - name: Test
-        run: go test -v ./...
+        run: go test 
       
       - name: Run main.go
         run: go run main.go
