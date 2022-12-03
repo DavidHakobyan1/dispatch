@@ -3,25 +3,20 @@ name: dispatch test
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
+      Go_version:
+        description: 'Version'
         required: true
-        default: 'warning'
+        default: '1.16'
         type: choice
         options:
-        - 1.16
-        - 1.14
-        - 1.15
+        - '1.16'
+        - '1.14'
+        - '1.15'
 
 jobs:
   log-the-inputs:
     runs-on: ubuntu-latest
     steps:
-        env:
-          LEVEL: ${{ inputs.logLevel }}
-          TAGS: ${{ inputs.tags }}
-          ENVIRONMENT: ${{ inputs.environment }}
-
        - uses: actions/checkout@v3
     
        - name: List files
@@ -30,7 +25,7 @@ jobs:
        - name: Setup Go
          uses: actions/setup-go@v3
          with:
-           go-version: ${{ inputs.logLevel }}
+           go-version: ${{ inputs.Go_version }}
          
        - name: Build
          run: go build -v ./...
