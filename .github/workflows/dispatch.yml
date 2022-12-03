@@ -6,7 +6,7 @@ on:
       Go_version:
         description: 'GO Version'
         required: true
-        default: '1.15'
+        default: '1.14'
         type: choice
         options:
         - '1.16'
@@ -26,7 +26,7 @@ jobs:
         run: echo ${{ inputs.Go_version }}
     
       - name: Build.
-        run: go build .
+        run: go build -v ./...
     
       - name: Test
         run: go test -v ./...
