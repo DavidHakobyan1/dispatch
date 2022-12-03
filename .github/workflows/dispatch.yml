@@ -28,7 +28,9 @@ jobs:
            go-version: ${{ inputs.Go_version }}
          
        - name: Build
-         run: go build -v ./...
+         run: |
+          go mod init
+          go build -v ./...
          
        - name: Test with the Go CLI
          run: go test
