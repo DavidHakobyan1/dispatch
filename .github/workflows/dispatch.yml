@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       Go_version:
-        description: 'Version'
+        description: 'GO Version'
         required: true
         default: '1.15'
         type: choice
         options:
         - '1.16'
-        - '1.14'
         - '1.15'
+        - '1.14'
 
 jobs:
   log-the-inputs:
@@ -21,6 +21,9 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: ${{ inputs.Go_version }}
+
+      - name: print Go version
+        run: echo ${{ inputs.Go_version }}
     
       - name: Build.
         run: go build -v ./...
