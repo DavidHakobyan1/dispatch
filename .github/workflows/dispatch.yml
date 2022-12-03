@@ -1,3 +1,5 @@
+
+
 on:
   workflow_dispatch:
     inputs:
@@ -32,21 +34,21 @@ jobs:
           TAGS: ${{ inputs.tags }}
           ENVIRONMENT: ${{ inputs.environment }}
 
-        - uses: actions/checkout@v3
-        
-        - name: List files
-          run: ls
-          
-        - name: Setup Go
-          uses: actions/setup-go@v3
-          with:
-            go-version: ${{ inputs.logLevel }}
-          
-        - name: Build
-          run: go build -v ./...
-          
-        - name: Test with the Go CLI
-          run: go test
-        
-        - name: Run main.go
-          run: go run main.go
+       - uses: actions/checkout@v3
+    
+       - name: List files
+         run: ls
+         
+       - name: Setup Go
+         uses: actions/setup-go@v3
+         with:
+           go-version: ${{ inputs.logLevel }}
+         
+       - name: Build
+         run: go build -v ./...
+         
+       - name: Test with the Go CLI
+         run: go test
+    
+       - name: Run main.go
+         run: go run main.go
