@@ -26,13 +26,7 @@ jobs:
         run: go build -v ./...
     
       - name: Test
-        run: go test -v ./... -json > TestResults-${{ inputs.Go_version }}.json
+        run: go test -v ./...
       
       - name: Run main.go
         run: go run main.go
-
-      - name: Upload Go test results
-        uses: actions/upload-artifact@v3
-        with:
-          name: Go-results-
-          path: TestResults-${{ inputs.Go_version }}.json
