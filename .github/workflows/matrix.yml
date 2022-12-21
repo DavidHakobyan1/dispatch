@@ -1,0 +1,32 @@
+name: matrix test
+
+on:
+  push:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, ubuntu-20.04]
+        version: [1.13, 1.14, 1.15]
+        
+    name: Build Container   
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Setup GO version
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.version }}
+
+      - name: print Go version
+        run: echo ${{ matrix.version }}
+    
+      - name: Build.
+        run: go build -v ./...
+    
+      - name: Test
+        run: go test -v ./... 
+      
+      - name: Run main.go
+        run: go run main.go
