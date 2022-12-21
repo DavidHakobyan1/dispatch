@@ -4,9 +4,6 @@ on:
   push:
     branches: [ "main" ]
     
-env:
-  DOCKERFILE: ${{ github.workspace }}/Dockerfile
-    
 jobs:
   build:
     strategy:
@@ -30,15 +27,6 @@ jobs:
         
       - name: Ls
         run: ls ${{ github.workspace }}
-        
-      - name: Create Dockerfile
-        run: |
-          touch ${{ env.DOCKERFILE }}
-          echo "FROM: golang:${{ matrix.version }}\nWORKDIR /app\nCOPY . .\nRUN go build -v ./...\nRUN go test -v ./...\nCMD [ "go", "run", "/app/main.go" ]" >> ${{ env.DOCKERFILE }}
-          cat ${{ env.DOCKERFILE }}
-        
-        
-      - run: ls ${{ github.workspace }}
     
       - name: Build.
         run: go build -v ./...
@@ -54,10 +42,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          
+      - name: Push image to DockerHub
+        run: |
+          docker push dockerid21656/updated_go_image:1.0.2
 
-      - name: Build and Push to DockerHub
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: dockerid21656/updated_go_image:1.0.2
+     # - name: Build and Push to DockerHub
+     #   uses: docker/build-push-action@v2
+     #   with:
+     #     context: .
+     #     push: true
+     #     tags: dockerid21656/updated_go_image:1.0.2
