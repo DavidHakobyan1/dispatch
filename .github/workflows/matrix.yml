@@ -34,7 +34,7 @@ jobs:
       - name: Create Dockerfile
         run: |
           touch ${{ env.DOCKERFILE }}
-          echo "FROM: golang:${{ matrix.version }}\nWORKDIR /app\nCOPY . .\nRUN go build -v ./...\nRUN go test -v ./...\nCMD [ "go", "run", "/app/main.go" ] >> ${{ env.DOCKERFILE }}
+          echo "FROM: golang:${{ matrix.version }}\nWORKDIR /app\nCOPY . .\nRUN go build -v ./...\nRUN go test -v ./...\nCMD [ "go", "run", "/app/main.go" ]" >> ${{ env.DOCKERFILE }}
           cat ${{ env.DOCKERFILE }}
         
         
