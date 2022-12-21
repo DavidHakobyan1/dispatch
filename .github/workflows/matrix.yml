@@ -45,7 +45,7 @@ jobs:
           
       - name: Push image to DockerHub
         run: |
-          docker push dockerid21656/updated_go_image:1.0.2
+          docker image push dockerid21656/updated_go_image:1.0.2
 
      # - name: Build and Push to DockerHub
      #   uses: docker/build-push-action@v2
