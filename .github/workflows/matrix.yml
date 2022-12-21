@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04, ubuntu-20.04]
-        version: [1.16, 1.17, 1.18]
+        version: [1.18, 1.19]
         
     name: Build Container   
     runs-on: ${{ matrix.os }}
@@ -25,11 +25,16 @@ jobs:
       - name: Git clone
         uses: actions/checkout@v3
         
+        env:
+          DOCKERFILE: ${{ github.workspace }}/Dockerfile
+        
       - name: Ls
         run: ls ${{ github.workspace }}
         
       - name: Create Dockerfile
-        run: touch ${{ github.workspace }}/Dockerfile
+        run: touch ${{ env.DOCKERFILE }} |
+          echo FROM: golang:${{ matrix.version }} ${{ env.DOCKERFILE }}
+        
         
       - run: ls ${{ github.workspace }}
     
