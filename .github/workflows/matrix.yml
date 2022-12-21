@@ -4,6 +4,9 @@ on:
   push:
     branches: [ "main" ]
     
+env:
+  DOCKERFILE: ${{ github.workspace }}/Dockerfile
+    
 jobs:
   build:
     strategy:
@@ -24,9 +27,6 @@ jobs:
         
       - name: Git clone
         uses: actions/checkout@v3
-        
-        env:
-          DOCKERFILE: ${{ github.workspace }}/Dockerfile
         
       - name: Ls
         run: ls ${{ github.workspace }}
