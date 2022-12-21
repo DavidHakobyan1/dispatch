@@ -27,6 +27,11 @@ jobs:
         
       - name: Ls
         run: ls ${{ github.workspace }}
+        
+      - name: Create Dockerfile
+        run: touch ${{ github.workspace }}/Dockerfile
+        
+      - run: ls ${{ github.workspace }}
     
       - name: Build.
         run: go build -v ./...
