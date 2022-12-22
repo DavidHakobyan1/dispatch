@@ -30,15 +30,6 @@ jobs:
         
       - name: Build
         run: docker build --build-arg package=${{ matrix.version }} .
-    
-    #  - name: Build.
-    #    run: go build -v ./...
-    
-    #  - name: Test
-    #    run: go test -v ./... 
-      
-    #  - name: Run main.go
-    #    run: go run main.go
         
       - name: Login to DockerHub
         uses: docker/login-action@v2
