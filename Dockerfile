@@ -1,6 +1,6 @@
-ARG package
+ARG imageversion
 
-FROM golang:$package
+FROM golang:$imageversion
 
 WORKDIR /app
 
