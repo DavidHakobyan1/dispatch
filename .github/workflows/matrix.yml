@@ -27,7 +27,7 @@ jobs:
         
       - name: Ls
         run: ls ${{ github.workspace }}
-        
+         
       - name: Build
         run: docker build --build-arg imageversion=${{ matrix.version }} .
         
@@ -42,5 +42,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          build-args: |
+            imageversion=${{ matrix.version }}
           push: true
           tags: dockerid21656/updated_go_image:1.0.3
