@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         
       - name: Check versions (Os,Go) Build and Push to DockerHub
-        if:  ${{ matrix.version }} != 1.18 && ${{ os.version }} != ubuntu-20.04
+        if:  ${{ matrix.version }} != 1.18 && ${{ matrix.os }} != ubuntu-20.04
         uses: docker/build-push-action@v2
         with:
           context: .
