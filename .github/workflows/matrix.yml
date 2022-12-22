@@ -29,17 +29,18 @@ jobs:
         run: ls ${{ github.workspace }}
         
       - name: Build
-        run: docker build --build-arg package=${{ matrix.version }} .
+        run: docker build --build-arg imageversion=${{ matrix.version }} .
         
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-     # - name: Build and Push to DockerHub
-     #   uses: docker/build-push-action@v2
-     #   with:
-     #     context: .
-     #     push: true
-     #     tags: dockerid21656/updated_go_image:1.0.2
+        
+      - name: Check versions (Os,Go) Build and Push to DockerHub
+        if:  ${{ matrix.version }} != 1.18 && ${{ os.version }} != ubuntu-20.04
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: dockerid21656/updated_go_image:1.0.3
